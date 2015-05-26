@@ -1,0 +1,19 @@
+CrawlerBundle\Entity\Website:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        url:
+            type: string
+            length: 255
+        created:
+            type: datetime
+        token:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }

@@ -1,0 +1,15 @@
+crawler:
+    resource: "@CrawlerBundle/Resources/config/routing.yml"
+    prefix:   /api/
+
+website:
+    resource: "@WebsiteBundle/Resources/config/routing.yml"
+    prefix:   /
+
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation

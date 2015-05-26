@@ -1,0 +1,26 @@
+{% extends 'JobBundle:Default:base.html.twig' %}
+{% block body %}
+<div class="row">
+    <h1>Users</h1>
+    <div class="col-md-12">
+        <table class="table table-striped">
+        <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Rol</th>
+        <th>Status</th>
+        <th>Action</th>
+        </tr>
+        {% for user in users %}
+            <tr>
+	          <td>{{ user.username }}</td>
+	          <td>{{ user.email }}</td>
+	          <td>{{ user.roles[0] }}</td>
+	          <td>{{ user.isActive }}</td>
+	          <td><a class="btn btn-default" href="users/update/{{ user.id }}" role="button">Edit</a></td>
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

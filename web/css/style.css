@@ -1,0 +1,95 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  background: #ccc;
+}
+h1, .h1, h2, .h2, h3, .h3 {
+    font-family: Proximanovabold,Helvetica,Arial,sans-serif;
+}
+p {
+    font-size: 14px;
+    line-height: 18px;
+    margin: 0 0 10px;
+    color: #666;
+}
+a {
+    color: #16a085;
+    text-decoration: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+a:hover{
+    color: #1abc9c;
+}
+
+/* INNER ICONS */
+/* enable absolute positioning */
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+.search-box{
+    text-align: center;
+    /* padding-top: 150px; */
+    font-size: 34px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px #333;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    padding-top: 150px;
+}
+.search-box input[type=text]{
+    color: #1abc9c;
+}
+.search-box input[type=submit]{
+  /* margin: -8px; */
+  padding: 12px;
+  background: #1abc9c;
+  border: 0px;
+  /* margin-top: -9px; */
+  font-size: 14px;
+  position: relative;
+  top: -6px;
+  left: -9px;
+  padding-bottom: 12px;
+}
+.img_logo_home{
+    width:30%;
+}
+#search{
+  width: 44%;
+  border-radius: 17px;
+  border: 0px;
+  padding-left: 20px;
+  font-size: 28px;
+  padding-top: 7px;
+  padding-bottom: 3px;
+}
+.right-addon .glyphicon {
+  right: 15px;
+  color: #333;
+  top: -3px;
+  font-size: 27px;
+}
+input[type='submit'] {
+  display:none;
+}

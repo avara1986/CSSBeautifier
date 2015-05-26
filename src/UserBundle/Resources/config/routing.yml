@@ -1,0 +1,11 @@
+users_list:
+    path:     /users
+    defaults: { _controller: UserBundle:Default:index }
+
+users_create:
+    path:     /users/create
+    defaults: { _controller: UserBundle:Default:userCreate }
+    
+users_update:
+    path:     /users/update/{id}
+    defaults: { _controller: UserBundle:Default:userUpdate }

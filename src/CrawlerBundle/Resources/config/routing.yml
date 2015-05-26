@@ -1,0 +1,27 @@
+crawler_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: CrawlerBundle:Default:index }
+website_read:
+    path:     /website/{id}/{token}
+    defaults: { _controller: CrawlerBundle:Website:read }
+    methods:  [GET]
+website_create:
+    path:     /website/
+    defaults: { _controller: CrawlerBundle:Website:create }
+    methods:  [POST]
+website_update:
+    path:     /website/{id}/{token}
+    defaults: { _controller: CrawlerBundle:Website:index }
+    methods:  [PUT]
+css_read:
+    path:     /css/{id}/{token}
+    defaults: { _controller: CrawlerBundle:Css:read }
+    methods:  [GET]
+css_create:
+    path:     /css/{token}
+    defaults: { _controller: CrawlerBundle:Css:create }
+    methods:  [POST]
+css_update:
+    path:     /css/{id}/{token}
+    defaults: { _controller: CrawlerBundle:Css:index }
+    methods:  [PUT]

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Beauty CSS{% endblock %}</title>
+        <meta name="description" content="{% block desc %}Clean unused CSS{% endblock %}" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Alberto Vara" />
+        <link href="https://plus.google.com/103835787359886932839" rel="publisher" />
+
+    <link rel="image_src" href="{{ asset('img/default.jpg') }}" />
+        {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-theme.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+        {% endblock %}
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body itemscope itemtype="http://schema.org/WebSite">
+	<div class="container" style="position: relative;top: -48px;text-align: center;">
+	    <div class="row ">
+	{% block body %}{% endblock %}
+        </div>
+	</div>
+    {% block javascripts %}
+    <script src="{{ asset('js/jquery-2.1.4.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
+    {% endblock %}
+    {% block extra_js %}
+    {% endblock %}
+</body>
+</html>
