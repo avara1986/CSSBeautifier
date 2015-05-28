@@ -5,6 +5,10 @@ website_read:
     path:     /website/{id}/{token}
     defaults: { _controller: CrawlerBundle:Website:read }
     methods:  [GET]
+website_read2:
+    path:     /website/{id}
+    defaults: { _controller: CrawlerBundle:Website:read }
+    methods:  [GET]
 website_create:
     path:     /website/
     defaults: { _controller: CrawlerBundle:Website:create }
@@ -17,10 +21,18 @@ css_read:
     path:     /css/{id}/{token}
     defaults: { _controller: CrawlerBundle:Css:read }
     methods:  [GET]
+css_read2:
+    path:     /css/{id}
+    defaults: { _controller: CrawlerBundle:Css:read }
+    methods:  [GET]
 css_create:
-    path:     /css/{token}
+    path:     /css/
     defaults: { _controller: CrawlerBundle:Css:create }
     methods:  [POST]
+css_create2:
+    path:     /css/
+    defaults: { _controller: CrawlerBundle:Css:create }
+    methods:  [GET]
 css_update:
     path:     /css/{id}/{token}
     defaults: { _controller: CrawlerBundle:Css:index }

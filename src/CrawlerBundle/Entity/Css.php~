@@ -1,0 +1,77 @@
+<?php
+
+namespace CrawlerBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Website
+ */
+class Css
+{
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var string
+     */
+    private $url;
+
+    /**
+     * @var \DateTime
+     */
+    private $created;
+
+    /**
+     * @var string
+     */
+    private $file;
+
+    /**
+     * @var string
+     */
+    private $original;
+
+    /**
+     * @var string
+     */
+    private $originalCompressed;
+
+    /**
+     * @var string
+     */
+    private $beauty;
+
+    /**
+     * @var string
+     */
+    private $beautyCompressed;
+
+    /**
+     * @var \CrawlerBundle\Entity\Website
+     */
+    private $website;
+
+    public function __construct()
+    {
+        $this->updatedTimestamps();
+    }
+    /**
+     * Now we tell doctrine that before we persist or update we call the updatedTimestamps() function.
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        //$this->setLastUpdated(new \DateTime(date('Y-m-d H:i:s')));
+
+        if($this->getCreated() == null)
+        {
+            $this->setCreated(new \DateTime(date('Y-m-d H:i:s')));
+        }
+    }
+
+}

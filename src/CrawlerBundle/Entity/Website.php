@@ -29,6 +29,11 @@ class Website
      */
     private $token;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $css;
+
     public function __construct()
     {
         $this->updatedTimestamps();
@@ -126,5 +131,37 @@ class Website
     public function getToken()
     {
         return $this->token;
+    }
+    /**
+     * Add css
+     *
+     * @param \CrawlerBundle\Entity\Css $css
+     * @return Website
+     */
+    public function addCss(\CrawlerBundle\Entity\Css $css)
+    {
+        $this->css[] = $css;
+
+        return $this;
+    }
+
+    /**
+     * Remove css
+     *
+     * @param \CrawlerBundle\Entity\Css $css
+     */
+    public function removeCss(\CrawlerBundle\Entity\Css $css)
+    {
+        $this->css->removeElement($css);
+    }
+
+    /**
+     * Get css
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCss()
+    {
+        return $this->css;
     }
 }

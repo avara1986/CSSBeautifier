@@ -1,0 +1,38 @@
+CrawlerBundle\Entity\Css:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        file:
+            type: string
+            length: 255
+        created:
+            type: datetime
+        original:
+            type: text
+            nullable: TRUE
+        originalCompressed:
+            type: text
+            nullable: TRUE
+            column: original_compressed
+        beauty:
+            type: text
+            nullable: TRUE
+        beautyCompressed:
+            type: text
+            nullable: TRUE
+            column: beauty_compressed
+    lifecycleCallbacks: {  }
+    manyToOne:
+        website:
+            targetEntity: Website
+            inversedBy: css
+            cascade: ["persist","remove"]
+            joinColumn:
+                name: website_id
+                referencedColumnName: id

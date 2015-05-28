@@ -17,3 +17,7 @@ CrawlerBundle\Entity\Website:
             type: string
             length: 255
     lifecycleCallbacks: {  }
+    oneToMany:
+        css:
+            targetEntity: Css
+            mappedBy: css

@@ -1,69 +1,67 @@
-Symfony Standard Edition
-========================
+# BeautyCSS (Nombre provisional)
+## Uso de la API
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony2
-application that you can use as the skeleton for your new applications.
+### 1. Guardar una web:
+Llamar a la siguiente API por POST. pasando la variable webiste
+```
+http://localhost:8000/api/website/
+```
+Con Curl:
+```sh
+$ curl -X POST --data "website=http://www.we-ma.com/" http://localhost:8000/api/website/
+```
+Devolverá un JSON con el Identificador y un token para continuar los procesos:
+```sh
+{"id":12,"token":"wDWGRgXEJ5qlI9IaJmV9cL/a3+o="}
+```
+### 2. Recuperar CSS una web:
+Llamar a la siguiente API por GET. pasando en la URL el ID y el TOKEN
+```
+http://localhost:8000/api/website/[ID]/[TOKEN]
+http://localhost:8000/api/website/[ID]?token=[TOKEN]
+```
+Siguiendo el ejemplo anterior, sería:
+```sh
+http://localhost:8000/api/website/12?token=wDWGRgXEJ5qlI9IaJmV9cL/a3+o=
+http://localhost:8000/api/website/12/wDWGRgXEJ5qlI9IaJmV9cL/a3+o=
+```
+o
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
+Devolviendo un JSON Con todos los CSS y otra vez los identificadores de la web. Por ejemplo:
+```sh
+{"id":12,
+"token":"wDWGRgXEJ5qlI9IaJmV9cL/a3+o=",
+"css":[{
+    "id":18,"url":"podcast\/css\/bootstrap.min.css"},
+    {"id":19,"url":"podcast\/css\/bootstrap-theme.min.css"},
+    {"id":20,"url":"podcast\/css\/font-awesome.min.css"},
+    {"id":21,"url":"podcast\/css\/style.css"},{"id":22}
+    ]}
+```
+Ahora. Con estos CSS, podremos actualizar sus datos de cada uno llamando a la siguiente API pasando el ID del Csv y el Token de su web:
+```
+http://localhost:8000/api/css/
+```
+Con Curl:
+```sh
+$ curl -X POST --data "id=21&token=wDWGRgXEJ5qlI9IaJmV9cL%2Fa3%2Bo%3D" http://localhost:8000/api/css/
+```
+Devolverá un código de respuesta 200 si todo OK. 404 si no encontró el CSS.
 
-What's inside?
---------------
+Para recuperar los datos, los CSS comprimidos y el CSS limpio se llamará a la API por GET:
 
-The Symfony Standard Edition is configured with the following defaults:
+```sh
+http://localhost:8000/api/css/21?token=wDWGRgXEJ5qlI9IaJmV9cL/a3+o=
+http://localhost:8000/api/css/21/wDWGRgXEJ5qlI9IaJmV9cL/a3+o=
+```
+Devolviendo un JSON. Por ejemplo
 
-  * An AppBundle you can use to start coding;
-
-  * Twig as the only configured template engine;
-
-  * Doctrine ORM/DBAL;
-
-  * Swiftmailer;
-
-  * Annotations enabled for everything.
-
-It comes pre-configured with the following bundles:
-
-  * **FrameworkBundle** - The core Symfony framework bundle
-
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * [**AsseticBundle**][12] - Adds support for Assetic, an asset processing
-    library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  http://symfony.com/doc/2.6/book/installation.html
-[6]:  http://symfony.com/doc/2.6/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  http://symfony.com/doc/2.6/book/doctrine.html
-[8]:  http://symfony.com/doc/2.6/book/templating.html
-[9]:  http://symfony.com/doc/2.6/book/security.html
-[10]: http://symfony.com/doc/2.6/cookbook/email.html
-[11]: http://symfony.com/doc/2.6/cookbook/logging/monolog.html
-[12]: http://symfony.com/doc/2.6/cookbook/assetic/asset_management.html
-[13]: http://symfony.com/doc/2.6/bundles/SensioGeneratorBundle/index.html
+```sh
+{"id":12,
+"created":"2015-05-28T12:34:44+0200",
+"original":"@charset ....",
+"original_compressed":"@charset ....",
+"beauty":"@charset ....",
+"beauty_compressed":"@charset ....",
+}
+```
