@@ -1,6 +1,6 @@
 # BeautyCSS (Nombre provisional)
 [![Build Status](https://travis-ci.org/avara1986/beautyCSS.svg?branch=master)](https://travis-ci.org/avara1986/beautyCSS)
-
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/8b4a705e-75ee-48d9-a83c-0965e6fa7b05/mini.png)](https://insight.sensiolabs.com/projects/8b4a705e-75ee-48d9-a83c-0965e6fa7b05)
 ## Uso de la API
 
 ### 1. Guardar una web:
