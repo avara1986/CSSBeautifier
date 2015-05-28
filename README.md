@@ -1,4 +1,6 @@
 # BeautyCSS (Nombre provisional)
+[![Build Status](https://travis-ci.org/avara1986/beautyCSS.svg?branch=master)](https://travis-ci.org/avara1986/beautyCSS)
+
 ## Uso de la API
 
 ### 1. Guardar una web:
