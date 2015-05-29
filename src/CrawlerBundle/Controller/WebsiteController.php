@@ -39,17 +39,14 @@ class WebsiteController extends Controller
             'css' => array(),
         );
         /**
-         * Verificamos que el CSS no existe en la base de datos,
-         * lo guaramos en caso negativo y devuelve todos los CSS que usa la web
+         * Verificamos que el CSS no existe en la base de datos, lo guaramos en caso negativo y devuelve todos los CSS que usa la web
          * */
         $result['css'] = $this->checkAndSaveCSS($crawler, $web);
-
         return new Response($serializer->serialize($result, 'json'),200);
     }
     public function createAction(Request $request)
     {
         $serializer = SerializerBuilder::create()->build();
-
         $website_url = $request->get('website');
         if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website_url)) {
             return new Response("ERROR URL",404);
