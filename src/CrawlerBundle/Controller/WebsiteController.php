@@ -63,7 +63,7 @@ class WebsiteController extends Controller
             $website = new Website();
         }
         $website->setUrl($website_url);
-        $website->setToken(base64_encode(pack('H*',sha1($website_url.$hash))));
+        $website->setToken(base64_encode(sha1($website_url.$hash)));
 
         $em->persist($website);
         $em->flush();
@@ -98,6 +98,12 @@ class WebsiteController extends Controller
         }
         return $website;
     }
+    /**
+     * checkAndSaveCSS
+     * @param Crawler $crawler
+     * @param Website $web
+     * @return multitype:multitype:number Ambigous <string, NULL>
+     */
     private function checkAndSaveCSS(Crawler $crawler, Website $web){
         $em = $this->getDoctrine()->getManager();
         $result_css = array();
@@ -110,7 +116,7 @@ class WebsiteController extends Controller
             $css_content_original = file_get_contents("http://".$web->getUrl()."/".$url);
             $css = $em->getRepository('CrawlerBundle:Css')->findOneBy(array('website' =>$web ,'file' => $url));
             if(count($css)==0) {
-                $css = $this->saveCSS($url, $css_content_original, $web);
+                $css = $this->saveCSS($url, $css_content_original, $web, $em);
             }
             $result_css[]= array(
                     'id' => $css->getId(),
@@ -120,6 +126,15 @@ class WebsiteController extends Controller
         $em->flush();
         return $result_css;
     }
+    /**
+     * saveCSS
+     * Se le pasa doctrine->GetManager ya que está función es usada en un loop y por ahorrar llamadas.
+     * @param string $url
+     * @param string $css_content_original
+     * @param Website $web
+     * @param unknown $em
+     * @return \CrawlerBundle\Entity\Css
+     */
     private function saveCSS($url, $css_content_original,Website $web, $em){
         $css = new Css();
         $css->setFile($url);

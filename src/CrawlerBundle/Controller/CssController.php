@@ -50,7 +50,10 @@ class CssController extends Controller
         if($crawler===false){
             return new Response("ERROR",404);
         }
-        $parser = $this->searchUnusedCss($crawler, $css);
+        $parser = new Parser($css->getOriginal());
+        $parser = $parser->parse();
+        $css_content_original_compressed = $parser->render();
+        $parser = $this->searchUnusedCss($crawler, $parser);
         $oFormat = OutputFormat::create()->indentWithSpaces(4)->setSpaceBetweenRules("\n");
         $css->setOriginalCompressed($css_content_original_compressed);
         $css->setBeautyCompressed($parser->render());
@@ -95,9 +98,7 @@ class CssController extends Controller
         }
         return $crawler;
     }
-    private function searchUnusedCss(Crawler $crawler, Css $css){
-        $parser = new Parser($css->getOriginal());
-        $parser = $parser->parse();
+    private function searchUnusedCss(Crawler $crawler, $parser){
         foreach($parser->getAllDeclarationBlocks() as $oBlock) {
             foreach($oBlock->getSelectors() as $oSelector) {
                 //Loop over all selector parts (the comma-separated strings in a selector) and prepend the id
