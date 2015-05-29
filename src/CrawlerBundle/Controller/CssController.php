@@ -74,7 +74,7 @@ class CssController extends Controller
             return false;
         }
         $client = new Client();
-        $crawler =  $client->request('GET', "http://".$css->getWebsite()->getUrl()."/".$css->getFile(), array(), array(), array(
+        $client->request('GET', "http://".$css->getWebsite()->getUrl()."/".$css->getFile(), array(), array(), array(
                 'HTTP_USER_AGENT' => 'BeautyCSS-bot/0.0.1',
         ));
         $status_code =  $client->getResponse()->getStatus();
@@ -98,7 +98,6 @@ class CssController extends Controller
     private function searchUnusedCss(Crawler $crawler, Css $css){
         $parser = new Parser($css->getOriginal());
         $parser = $parser->parse();
-        $css_content_original_compressed = $parser->render();
         foreach($parser->getAllDeclarationBlocks() as $oBlock) {
             foreach($oBlock->getSelectors() as $oSelector) {
                 //Loop over all selector parts (the comma-separated strings in a selector) and prepend the id

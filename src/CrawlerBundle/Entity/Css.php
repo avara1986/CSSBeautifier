@@ -15,11 +15,6 @@ class Css
     private $id;
 
     /**
-     * @var string
-     */
-    private $url;
-
-    /**
      * @var \DateTime
      */
     private $created;

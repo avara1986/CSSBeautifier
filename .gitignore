@@ -28,7 +28,6 @@ Session.vim
 # eclipse
 *.pydevproject
 .project
-.metadata
 bin/**
 tmp/**
 tmp/**/*
