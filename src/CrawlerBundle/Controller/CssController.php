@@ -11,7 +11,6 @@ use Sabberworm\CSS\Parser;
 use Sabberworm\CSS\OutputFormat;
 use JMS\Serializer\SerializerBuilder;
 use CrawlerBundle\Entity\Website;
-use CrawlerBundle\Entity\Css;
 
 class CssController extends Controller
 {

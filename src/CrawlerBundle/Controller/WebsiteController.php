@@ -29,7 +29,7 @@ class WebsiteController extends Controller
         /**
          * Verificamos que la url funciona y devuelve un objeto crawler
          */
-        $crawler =  $this->getWebsiteURL($web);
+        $crawler =  $this->getWebsiteURL($web->getUrl());
         if($crawler===false){
             return new Response("ERROR",404);
         }
@@ -56,6 +56,9 @@ class WebsiteController extends Controller
         }
         $website_url = (preg_replace("/(https?|ftp):\/\//","",$website_url,1));
         $website_url = strrev(preg_replace("/\//","",strrev($website_url),1));
+        if($this->getWebsiteURL($website_url)===false){
+            return new Response("ERROR",404);
+        }
         $hash="¡Viva la gente!";
         $em = $this->getDoctrine()->getManager();
         $website = $em->getRepository('CrawlerBundle:Website')->findOneBy(array('url' => $website_url));
@@ -77,10 +80,10 @@ class WebsiteController extends Controller
     {
         return $this->render('CrawlerBundle:Default:index.html.twig', array());
     }
-    private function getWebsiteURL(Website $web)
+    private function getWebsiteURL($web_url)
     {
         $client = new Client();
-        $crawler =  $client->request('GET', "http://".$web->getUrl(), array(), array(), array(
+        $crawler =  $client->request('GET', "http://".$web_url, array(), array(), array(
                 'HTTP_USER_AGENT' => 'BeautyCSS-bot/0.0.1',
         ));
         $status_code =  $client->getResponse()->getStatus();

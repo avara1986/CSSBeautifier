@@ -75,7 +75,7 @@ a:hover{
 .img_logo_home{
     width:30%;
 }
-#search{
+#website{
   width: 44%;
   border-radius: 17px;
   border: 0px;
@@ -92,4 +92,7 @@ a:hover{
 }
 input[type='submit'] {
   display:none;
+}
+#website_error, #loading{
+    display: none;
 }

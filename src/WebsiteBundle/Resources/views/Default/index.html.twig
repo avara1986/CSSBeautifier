@@ -1,19 +1,42 @@
 {% extends 'WebsiteBundle:Default:base.html.twig' %}
 {% block body %}
-    <div class="search-box" >
-    <form action="" id="cse-search-box">
-      <div>
-        <span class="inner-addon right-addon">
-            <i class="glyphicon glyphicon-search"></i>
-            <input type="text" name="q" id="search" size="55"/>
-        </span>
-        <input type="submit" name="sa" value="Buscar" />
-      </div>
-    </form>
+<div class="row ">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+	<p>Con <b>BeautyCSS</b> elimina las reglas y bloques de CSS que ya no se usan en tu web</p>
+	</div>
+</div>
+<div class="row ">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+	    <div class="search-box" >
+	    <form action="" id="cse-search-box" onsubmit="return false;">
+	      <div>
+	        <span class="inner-addon right-addon">
+	            <i class="glyphicon glyphicon-search"></i>
+	            <input type="text" name="website" id="website" size="55"  />
+	        </span>
+	        <input type="submit" name="sa" value="Buscar" />
+	      </div>
+	    </form>
+	    </div>
+	</div>
+</div>
+<div class="row ">
+    <div id="loading" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <img src="{{ asset('img/3.gif') }}" alt="">Analizando...
     </div>
-    <div id="website_info"></div>
-    <div id="css_info"></div>
-    <div id="result_info"></div>
+</div>
+<div class="row ">
+    <div id="website_error" class="alert alert-danger" role="alert">la web solicitada no existe o no puede ser analizada en estos momentos</div>
+</div>
+<div class="row ">
+    <div id="website_info" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ></div>
+</div>
+<div class="row ">
+    <div id="css_info" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ></div>
+</div>
+<div class="row ">
+	<div id="result_info" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ></div>
+</div>
 {% endblock %}
 {% block extra_js %}
     <script src="{{ asset('js/functions.js') }}" type="text/javascript"></script>
