@@ -10,6 +10,8 @@ composer.lock
 /build/
 /vendor/
 /bin/
+/web/config.php
+.buildpath
 # -- Composer -----------------------------------------
 composer.phar
 
