@@ -17,13 +17,11 @@ class WebsiteController extends Controller
     public function readAction(Request $request, $id, $token = "")
     {
         if(strlen($token)==0) $token = $request->get('token');
-        $em = $this->getDoctrine()->getManager();
+
         $serializer = SerializerBuilder::create()->build();
         /**
          * Obtenemos el objeto website utiilizando el token
          */
-        //var_dump($id);
-        //var_dump($token);
         $web = $this->getWebsite($id, $token);
         if($web===false){
             return new Response("ERROR",404);
@@ -40,35 +38,7 @@ class WebsiteController extends Controller
             'token' => $web->getToken(),
             'css' => array(),
         );
-        $result_css = array();
-
-        /*
-         * */
-        foreach($crawler->filter('[type="text/css"]') as $content){
-            $node = new Crawler($content);
-            $url_original = $node->attr('href');
-            $url = preg_replace("/(https?|ftp):\/\//","",$url_original);
-            $url = str_replace($web->getUrl(),"",$url);
-            $css_content_original = file_get_contents("http://".$web->getUrl()."/".$url);
-            //$parser = new Parser($css_content_original);
-            //$css_content_compressed = $parser->parse()->render();
-            $css = $em->getRepository('CrawlerBundle:Css')->findOneBy(array('website' =>$web ,'file' => $url));
-            if(count($css)==0) {
-                $css = new Css();
-                $css->setFile($url);
-                $css->setOriginal($css_content_original);
-                //$css->setCompressed($css_content_compressed);
-                $css->setWebsite($web);
-                $em->persist($css);
-                $em->flush();
-
-            }
-            $result_css[]= array(
-                    'id' => $css->getId(),
-                    'url' => $url_original,
-            );
-        }
-        $result['css'] = $result_css;
+        $result['css'] = $this->checkAndSaveCSS($crawler, $web);
 
         return new Response($serializer->serialize($result, 'json'),200);
     }
@@ -124,5 +94,39 @@ class WebsiteController extends Controller
             return false;
         }
         return $website;
+    }
+    private function checkAndSaveCSS(Crawler $crawler, Website $web){
+        $em = $this->getDoctrine()->getManager();
+        $result_css = array();
+
+        foreach($crawler->filter('[type="text/css"]') as $content){
+            $node = new Crawler($content);
+            $url_original = $node->attr('href');
+            $url = preg_replace("/(https?|ftp):\/\//","",$url_original);
+            $url = str_replace($web->getUrl(),"",$url);
+            $css_content_original = file_get_contents("http://".$web->getUrl()."/".$url);
+            //$parser = new Parser($css_content_original);
+            //$css_content_compressed = $parser->parse()->render();
+            $css = $em->getRepository('CrawlerBundle:Css')->findOneBy(array('website' =>$web ,'file' => $url));
+            if(count($css)==0) {
+                $css = $this->saveCSS($url, $css_content_original, $web);
+            }
+            $result_css[]= array(
+                    'id' => $css->getId(),
+                    'url' => $url_original,
+            );
+        }
+        $em->flush();
+        return $result_css;
+    }
+    private function saveCSS($url, $css_content_original,Website $web, $em){
+        $css = new Css();
+        $css->setFile($url);
+        $css->setOriginal($css_content_original);
+        $css->setWebsite($web);
+        $em->persist($css);
+        $em->flush();
+        $em->flush();
+        return $css;
     }
 }
