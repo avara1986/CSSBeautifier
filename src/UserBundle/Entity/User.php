@@ -2,9 +2,7 @@
 
 namespace UserBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
-//INSERT INTO `test_flying_free`.`User` (`id`, `email`, `username`, `password`, `salt`) VALUES (NULL, 'a.vara.1986@gmail.com', 'alberto', SHA1('1234'), '');
 /**
  * User
  */

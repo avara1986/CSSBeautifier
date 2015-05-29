@@ -66,9 +66,7 @@ class Css
      */
     public function updatedTimestamps()
     {
-        //$this->setLastUpdated(new \DateTime(date('Y-m-d H:i:s')));
-
-        if($this->getCreated() == null)
+        if($this->getCreated() === null)
         {
             $this->setCreated(new \DateTime(date('Y-m-d H:i:s')));
         }
@@ -78,7 +76,7 @@ class Css
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -101,7 +99,7 @@ class Css
     /**
      * Get file
      *
-     * @return string 
+     * @return string
      */
     public function getFile()
     {
@@ -124,7 +122,7 @@ class Css
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -147,7 +145,7 @@ class Css
     /**
      * Get original
      *
-     * @return string 
+     * @return string
      */
     public function getOriginal()
     {
@@ -170,7 +168,7 @@ class Css
     /**
      * Get originalCompressed
      *
-     * @return string 
+     * @return string
      */
     public function getOriginalCompressed()
     {
@@ -193,7 +191,7 @@ class Css
     /**
      * Get beauty
      *
-     * @return string 
+     * @return string
      */
     public function getBeauty()
     {
@@ -216,7 +214,7 @@ class Css
     /**
      * Get beautyCompressed
      *
-     * @return string 
+     * @return string
      */
     public function getBeautyCompressed()
     {
@@ -239,7 +237,7 @@ class Css
     /**
      * Get website
      *
-     * @return \CrawlerBundle\Entity\Website 
+     * @return \CrawlerBundle\Entity\Website
      */
     public function getWebsite()
     {

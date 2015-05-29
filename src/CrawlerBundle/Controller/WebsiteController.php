@@ -38,6 +38,10 @@ class WebsiteController extends Controller
             'token' => $web->getToken(),
             'css' => array(),
         );
+        /**
+         * Verificamos que el CSS no existe en la base de datos,
+         * lo guaramos en caso negativo y devuelve todos los CSS que usa la web
+         * */
         $result['css'] = $this->checkAndSaveCSS($crawler, $web);
 
         return new Response($serializer->serialize($result, 'json'),200);
@@ -68,7 +72,6 @@ class WebsiteController extends Controller
                 'token' => $website->getToken(),
         );
         return new Response($serializer->serialize($result, 'json'),200);
-        //return $this->render('CrawlerBundle:Default:index.html.twig', array());
     }
     public function updateAction($id, $token)
     {
@@ -105,8 +108,6 @@ class WebsiteController extends Controller
             $url = preg_replace("/(https?|ftp):\/\//","",$url_original);
             $url = str_replace($web->getUrl(),"",$url);
             $css_content_original = file_get_contents("http://".$web->getUrl()."/".$url);
-            //$parser = new Parser($css_content_original);
-            //$css_content_compressed = $parser->parse()->render();
             $css = $em->getRepository('CrawlerBundle:Css')->findOneBy(array('website' =>$web ,'file' => $url));
             if(count($css)==0) {
                 $css = $this->saveCSS($url, $css_content_original, $web);

@@ -46,9 +46,7 @@ class Website
      */
     public function updatedTimestamps()
     {
-        //$this->setLastUpdated(new \DateTime(date('Y-m-d H:i:s')));
-
-        if($this->getCreated() == null)
+        if($this->getCreated() === null)
         {
             $this->setCreated(new \DateTime(date('Y-m-d H:i:s')));
         }
