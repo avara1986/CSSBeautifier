@@ -42,7 +42,9 @@ class WebsiteController extends Controller
          * Verificamos que el CSS no existe en la base de datos, lo guaramos en caso negativo y devuelve todos los CSS que usa la web
          * */
         $result['css'] = $this->checkAndSaveCSS($crawler, $web);
-        return new Response($serializer->serialize($result, 'json'),200);
+        $response = new Response($serializer->serialize($result, 'json'),200);
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        return $response;
     }
     public function createAction(Request $request)
     {
@@ -71,7 +73,9 @@ class WebsiteController extends Controller
                 'id' => $website->getId(),
                 'token' => $website->getToken(),
         );
-        return new Response($serializer->serialize($result, 'json'),200);
+        $response = new Response($serializer->serialize($result, 'json'),200);
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        return $response;
     }
     public function updateAction($id, $token)
     {
@@ -80,9 +84,13 @@ class WebsiteController extends Controller
     private function getWebsiteURL($web_url)
     {
         $client = new Client();
-        $crawler =  $client->request('GET', "http://".$web_url, array(), array(), array(
-                'HTTP_USER_AGENT' => 'BeautyCSS-bot/0.0.1',
-        ));
+        try {
+            $crawler =  $client->request('GET', "http://".$web_url, array(), array(), array(
+                    'HTTP_USER_AGENT' => 'BeautyCSS-bot/0.0.1',
+            ));
+        }catch (HttpConnectException $e) {
+            return false;
+        }
         $status_code =  $client->getResponse()->getStatus();
         if($status_code!=200){
             return false;
@@ -113,14 +121,22 @@ class WebsiteController extends Controller
             $url_original = $node->attr('href');
             $url = preg_replace("/(https?|ftp):\/\//","",$url_original);
             $url = str_replace($web->getUrl(),"",$url);
-            $css_content_original = file_get_contents("http://".$web->getUrl()."/".$url);
+            if (!preg_match("/^\//", $url)){
+                $url = "/".$url;
+            }
+            //var_dump("http://".$web->getUrl()."".$url);
+            try {
+                $css_content_original = file_get_contents("http://".$web->getUrl()."".$url);
+            } catch (Exception $e) {
+                $css_content_original = "";
+            }
             $css = $em->getRepository('CrawlerBundle:Css')->findOneBy(array('website' =>$web ,'file' => $url));
             if(count($css)==0) {
                 $css = $this->saveCSS($url, $css_content_original, $web, $em);
             }
             $result_css[]= array(
                     'id' => $css->getId(),
-                    'url' => $url_original,
+                    'url' => "http://".$web->getUrl()."".$url,
             );
         }
         $em->flush();

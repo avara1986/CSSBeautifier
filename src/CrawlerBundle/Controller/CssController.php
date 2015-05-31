@@ -34,7 +34,9 @@ class CssController extends Controller
                 'beauty_compressed' => $css->getBeautyCompressed(),
 
         );
-        return new Response($serializer->serialize($result, 'json'),200);
+        $response = new Response($serializer->serialize($result, 'json'),200);
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        return $response;
     }
     public function createAction(Request $request)
     {
@@ -59,7 +61,9 @@ class CssController extends Controller
         $css->setBeauty($parser->render($oFormat));
         $em->persist($css);
         $em->flush();
-        return new Response("OK",200);
+        $response = new Response("OK",200);
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        return $response;
     }
     public function updateAction($id, $token)
     {
