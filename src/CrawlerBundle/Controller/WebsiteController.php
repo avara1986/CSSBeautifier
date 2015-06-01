@@ -124,7 +124,6 @@ class WebsiteController extends Controller
             if (!preg_match("/^\//", $url)){
                 $url = "/".$url;
             }
-            //var_dump("http://".$web->getUrl()."".$url);
             try {
                 $css_content_original = file_get_contents("http://".$web->getUrl()."".$url);
             } catch (Exception $e) {
