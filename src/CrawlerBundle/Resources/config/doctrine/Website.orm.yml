@@ -20,4 +20,4 @@ CrawlerBundle\Entity\Website:
     oneToMany:
         css:
             targetEntity: Css
-            mappedBy: css
+            mappedBy: website
