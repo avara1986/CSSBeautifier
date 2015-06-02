@@ -126,7 +126,7 @@ class WebsiteController extends Controller
             }
             try {
                 $css_content_original = file_get_contents("http://".$web->getUrl()."".$url);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 $css_content_original = "";
             }
             $css = $em->getRepository('CrawlerBundle:Css')->findOneBy(array('website' =>$web ,'file' => $url));
