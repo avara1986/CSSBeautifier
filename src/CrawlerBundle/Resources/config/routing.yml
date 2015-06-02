@@ -13,10 +13,6 @@ website_create:
     path:     /website/
     defaults: { _controller: CrawlerBundle:Website:create }
     methods:  [POST]
-website_update:
-    path:     /website/{id}/{token}
-    defaults: { _controller: CrawlerBundle:Website:index }
-    methods:  [PUT]
 css_read:
     path:     /css/{id}/{token}
     defaults: { _controller: CrawlerBundle:Css:read }
@@ -29,11 +25,7 @@ css_create:
     path:     /css/
     defaults: { _controller: CrawlerBundle:Css:create }
     methods:  [POST]
-css_create2:
-    path:     /css/
-    defaults: { _controller: CrawlerBundle:Css:create }
-    methods:  [GET]
-css_update:
-    path:     /css/{id}/{token}
-    defaults: { _controller: CrawlerBundle:Css:index }
-    methods:  [PUT]
+#css_create2:
+#    path:     /css/
+#    defaults: { _controller: CrawlerBundle:Css:create }
+#    methods:  [GET]

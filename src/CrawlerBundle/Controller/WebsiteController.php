@@ -88,7 +88,7 @@ class WebsiteController extends Controller
             $crawler =  $client->request('GET', "http://".$web_url, array(), array(), array(
                     'HTTP_USER_AGENT' => 'BeautyCSS-bot/0.0.1',
             ));
-        }catch (HttpConnectException $e) {
+        }catch (\HttpConnectException $e) {
             return false;
         }
         $status_code =  $client->getResponse()->getStatus();
