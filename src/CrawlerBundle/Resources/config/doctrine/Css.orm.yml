@@ -31,7 +31,6 @@ CrawlerBundle\Entity\Css:
     manyToOne:
         website:
             targetEntity: Website
-            inversedBy: csss
             cascade: ["persist","remove"]
             joinColumn:
                 name: website_id
