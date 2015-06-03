@@ -1,6 +1,6 @@
 CrawlerBundle\Entity\Css:
     type: entity
-    table: css
+    table: Css
     id:
         id:
             type: integer
