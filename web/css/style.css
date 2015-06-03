@@ -3,8 +3,9 @@
  */
 
 /* Move down content because we have a fixed navbar that is 50px tall */
-body {
+html,body {
   background: #ccc;
+  height: 100%;
 }
 h1, .h1, h2, .h2, h3, .h3 {
     font-family: Proximanovabold,Helvetica,Arial,sans-serif;
@@ -24,9 +25,30 @@ a {
 a:hover{
     color: #1abc9c;
 }
-
-/* INNER ICONS */
-/* enable absolute positioning */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -60px;
+}
+.container {
+	width: auto;
+	text-align: center;
+}
+#push,#footer {
+        height: 60px;
+      }
+#cleaner{
+	background: url("../img/background.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  padding-bottom: 40px;
+	
+	
+}
+/* BUSCADOR */
 .inner-addon { 
     position: relative; 
 }
@@ -72,9 +94,6 @@ a:hover{
   left: -9px;
   padding-bottom: 12px;
 }
-.img_logo_home{
-    width:30%;
-}
 #website{
   width: 44%;
   border-radius: 17px;
@@ -93,6 +112,7 @@ a:hover{
 input[type='submit'] {
   display:none;
 }
+/* FIN BUSCADOR */
 .error, .loading, .info{
     display: none;
     font-size: 20px;
