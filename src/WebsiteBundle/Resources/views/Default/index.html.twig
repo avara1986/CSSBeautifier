@@ -9,6 +9,9 @@
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
 	    <div class="search-box" >
 	    <form action="" id="cse-search-box" onsubmit="return false;">
+	      <input type="hidden" name="website_id" id="website_id"  />
+	      <input type="hidden" name="token" id="token"  />
+	      <input type="hidden" name="css_id" id="css_id"  />
 	      <div>
 	        <span class="inner-addon right-addon">
 	            <i class="glyphicon glyphicon-search"></i>
@@ -20,19 +23,41 @@
 	    </div>
 	</div>
 </div>
-<div class="row ">
-    <div id="loading" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <img src="{{ asset('img/3.gif') }}" alt="">Analizando...
+<!-- WEBSITE -->
+<div class="row loading" id="loading_website" >
+    <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="alert alert-info" role="alert">
+            <i class="fa fa-spinner fa-spin"></i> Analizando URL...
+        </div>
     </div>
 </div>
-<div class="row ">
-    <div id="website_error" class="alert alert-danger" role="alert">la web solicitada no existe o no puede ser analizada en estos momentos</div>
+<div class="row error" id="website_error">
+	<div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+	    <div class="alert alert-danger" role="alert">la web solicitada no existe o no puede ser analizada en estos momentos</div>
+	</div>
 </div>
-<div class="row ">
-    <div id="website_info" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ></div>
+<div class="row info" id="website_info">
+    <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+    <div id="website_info_msg"></div>
+    </div>
 </div>
-<div class="row ">
-    <div id="css_info" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ></div>
+<!-- CSS -->
+<div class="row loading" id="loading_css">
+    <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="alert alert-info" role="alert">
+            <i class="fa fa-spinner fa-spin"></i> Analizando CSS...
+        </div>
+    </div>
+</div>
+<div class="row error" id="css_error">
+    <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+        <div class="alert alert-danger" role="alert">Se produjo un error recuperando los CSS</div>
+    </div>
+</div>
+<div class="row info" id="css_info">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+    <div id="css_info_msg"></div>
+    </div>
 </div>
 <div class="row ">
 	<div id="result_info" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ></div>

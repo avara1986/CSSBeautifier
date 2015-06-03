@@ -32,11 +32,12 @@ class Website
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $css;
+    private $csss;
 
     public function __construct()
     {
         $this->updatedTimestamps();
+        $this->csss = new ArrayCollection();
     }
     /**
      * Now we tell doctrine that before we persist or update we call the updatedTimestamps() function.
