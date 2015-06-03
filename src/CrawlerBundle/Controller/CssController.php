@@ -56,8 +56,8 @@ class CssController extends Controller
         $css_content_original_compressed = $parser->render();
         $parser = $this->searchUnusedCss($crawler, $parser);
         $oFormat = OutputFormat::create()->indentWithSpaces(4)->setSpaceBetweenRules("\n");
-        $css->setOriginalCompressed($css_content_original_compressed);
-        $css->setBeautyCompressed($parser->render());
+        $css->setOriginalCompressed(trim(preg_replace('/\s+/', ' ', $css_content_original_compressed)));
+        $css->setBeautyCompressed(trim(preg_replace('/\s+/', ' ', $parser->render())));
         $css->setBeauty($parser->render($oFormat));
         $em->persist($css);
         $em->flush();
