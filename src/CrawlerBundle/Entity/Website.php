@@ -37,6 +37,7 @@ class Website
     public function __construct()
     {
         $this->updatedTimestamps();
+        $this->css = new ArrayCollection();
     }
     /**
      * Now we tell doctrine that before we persist or update we call the updatedTimestamps() function.
