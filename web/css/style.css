@@ -76,7 +76,7 @@ a:hover{
     text-shadow: 1px 1px #333;
     width: 100%;
     padding: 0px;
-    margin: 0px;
+    margin: 0 0 20px;
     padding-top: 150px;
 }
 .search-box input[type=text]{
