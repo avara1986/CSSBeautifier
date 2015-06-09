@@ -19,7 +19,7 @@ function sendWebsite(){
         	$('#website_info').css('display','block');
         	$('#website_info_msg').addClass('alert');
         	$('#website_info_msg').addClass('alert-success');
-            $('#website_info_msg').html('La web <b>'+$('#website').val()+'</b> fue analizada correctamente');
+            $('#website_info_msg').html('The URL <b>'+$('#website').val()+'</b> was successfully analyzed');
             getWebsiteCSS();
         },
         statusCode: {
@@ -93,7 +93,7 @@ function sendCss(id_css){
             
             $('.loading').css('display','none');
             $('#css_'+id_css).append('<div id="css_info_'+id_css+'">\
-                    <h3>El CSS fue generado correctamente</h3>\
+                    <h3>The CSS file was successfully created</h3>\
                     </div>');
             getCss(id_css);
         },
@@ -121,11 +121,11 @@ function getCss(id_css){
         url: "/api/css/"+id_css+"/"+$('#token').val(),
         success: function(data) {
             $('#css_info_'+id_css).html("");
-            $('#css_info_'+id_css).append('<h4>Original comprimido</h4>\
+            $('#css_info_'+id_css).append('<h4>Original compressed</h4>\
                     <textarea onclick="this.focus();this.select()">'+data.original_compressed+'</textarea>\
-                    <h4>Limpio</h4>\
+                    <h4>Clean without unsued rules</h4>\
                     <textarea onclick="this.focus();this.select()">'+data.beauty+'</textarea>\
-                    <h4>Limpio comprimido</h4>\
+                    <h4>Clean without unsued rules compressed</h4>\
                     <textarea onclick="this.focus();this.select()">'+data.beauty_compressed+'</textarea>\
                     </div>');
         },
@@ -148,7 +148,7 @@ function genLoading(id){
     return '<div class="row loading" id="loading_css_'+id+'">\
         <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12">\
         <div class="alert alert-info" role="alert">\
-            <i class="fa fa-spinner fa-spin"></i> Analizando CSS...\
+            <i class="fa fa-spinner fa-spin"></i> analyzing CSS...\
         </div>\
     </div>\
     </div>';
