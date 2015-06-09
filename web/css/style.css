@@ -45,8 +45,10 @@ a:hover{
   -o-background-size: cover;
   background-size: cover;
   padding-bottom: 40px;
-	
-	
+  margin: 0px;
+}
+#cleaner .row{
+	margin:0px;
 }
 /* BUSCADOR */
 .inner-addon { 

@@ -1,0 +1,22 @@
+<IfModule mod_deflate.c>
+        # compress text, html, javascript, css, xml:
+        AddOutputFilterByType DEFLATE text/plain
+        AddOutputFilterByType DEFLATE text/html
+        AddOutputFilterByType DEFLATE text/xml
+        AddOutputFilterByType DEFLATE text/css
+        AddOutputFilterByType DEFLATE text/javascript
+        AddOutputFilterByType DEFLATE text/x-component
+        AddOutputFilterByType DEFLATE application/xml
+        AddOutputFilterByType DEFLATE application/xhtml+xml
+        AddOutputFilterByType DEFLATE application/rss+xml
+        AddOutputFilterByType DEFLATE application/javascript
+        AddOutputFilterByType DEFLATE application/x-javascript
+        AddOutputFilterByType DEFLATE image/x-icon
+</IfModule>
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteCond %{HTTP_HOST} ^cssbeautifier.com$ [NC,OR]
+    RewriteCond %{HTTP_HOST} ^www.cssbeautifier.com$
+    RewriteCond %{REQUEST_URI} !web/
+    RewriteRule (.*) /web/$1 [L]
+</IfModule>
