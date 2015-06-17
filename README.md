@@ -1,5 +1,6 @@
 # CSS Beautifier
 [![Build Status](https://travis-ci.org/avara1986/CSSBeautifier.svg?branch=master)](https://travis-ci.org/avara1986/CSSBeautifier)
+[![Coverage Status](https://coveralls.io/repos/avara1986/CSSBeautifier/badge.svg)](https://coveralls.io/r/avara1986/CSSBeautifier)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/2a59ada0-9b0f-4ebc-874b-5f756a852fc1/mini.png)](https://insight.sensiolabs.com/projects/2a59ada0-9b0f-4ebc-874b-5f756a852fc1)
 
 ## Proyectos:
