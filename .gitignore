@@ -74,6 +74,7 @@ $RECYCLE.BIN/
 # Linux
 .*
 !.gitignore
+!.coveralls.yml
 !.htaccess
 *~
 
