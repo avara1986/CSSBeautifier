@@ -22,7 +22,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "jms/serializer-bundle": "0.13.*",
         "sabberworm/php-css-parser": "*",
-        "fabpot/goutte": "~2.0"
+        "fabpot/goutte": "~2.0",
+        "satooshi/php-coveralls": "0.6.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
