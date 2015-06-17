@@ -20,7 +20,9 @@
         <server name="KERNEL_DIR" value="/path/to/your/app/" />
     </php>
     -->
-
+    <logging>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+    </logging>
     <filter>
         <whitelist>
             <directory>../src</directory>
