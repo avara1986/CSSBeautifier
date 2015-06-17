@@ -16,6 +16,9 @@ before_script:
 script:
   - phpunit -c app --coverage-clover build/logs/clover.xml
 
+after_script:
+  - php vendor/bin/coveralls -v
+
 notifications:
   email:
     -  a.vara.1986@gmail.com
