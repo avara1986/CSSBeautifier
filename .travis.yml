@@ -17,7 +17,7 @@ script:
   - phpunit -c app --coverage-clover build/logs/clover.xml
 
 after_script:
-  - php vendor/bin/coveralls -v
+  - php vendor/satooshi/php-coveralls/composer/bin/coveralls -v
 
 notifications:
   email:
