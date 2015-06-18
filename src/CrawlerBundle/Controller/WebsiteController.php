@@ -121,22 +121,25 @@ class WebsiteController extends Controller
             $url_original = $node->attr('href');
             $url = preg_replace("/(https?|ftp):\/\//","",$url_original);
             $url = str_replace($web->getUrl(),"",$url);
-            if (!preg_match("/^\//", $url)){
-                $url = "/".$url;
+            $url = preg_replace("/\?(.*)/", "", $url);
+            if(!preg_match("/fonts\.googleapis\.com/", $url) && preg_match("/\.css/", $url)){
+                if (!preg_match("/^\//", $url)){
+                    $url = "/".$url;
+                }
+                try {
+                    $css_content_original = file_get_contents("http://".$web->getUrl()."".$url);
+                } catch (\Exception $e) {
+                    $css_content_original = "";
+                }
+                $css = $em->getRepository('CrawlerBundle:Css')->findOneBy(array('website' =>$web ,'file' => $url));
+                if(count($css)==0) {
+                    $css = $this->saveCSS($url, $css_content_original, $web, $em);
+                }
+                $result_css[]= array(
+                        'id' => $css->getId(),
+                        'url' => "http://".$web->getUrl()."".$url,
+                );
             }
-            try {
-                $css_content_original = file_get_contents("http://".$web->getUrl()."".$url);
-            } catch (\Exception $e) {
-                $css_content_original = "";
-            }
-            $css = $em->getRepository('CrawlerBundle:Css')->findOneBy(array('website' =>$web ,'file' => $url));
-            if(count($css)==0) {
-                $css = $this->saveCSS($url, $css_content_original, $web, $em);
-            }
-            $result_css[]= array(
-                    'id' => $css->getId(),
-                    'url' => "http://".$web->getUrl()."".$url,
-            );
         }
         $em->flush();
         return $result_css;
