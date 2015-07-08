@@ -107,7 +107,7 @@ class CssController extends Controller
                 //Loop over all selector parts (the comma-separated strings in a selector) and prepend the id
                 $num_elements=1;
                 $selector = $oSelector->getSelector();
-                if(!preg_match("/focus/i", $selector)){
+                if(!preg_match("/focus/i", $selector) && !preg_match("/:/i", $selector)){
                     $num_elements = count($crawler->filter($selector));
                 }
                 if($num_elements==0){
