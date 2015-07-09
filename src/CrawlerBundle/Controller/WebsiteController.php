@@ -116,7 +116,7 @@ class WebsiteController extends Controller
         $em = $this->getDoctrine()->getManager();
         $result_css = array();
 
-        foreach($crawler->filter('[type="text/css"]') as $content){
+        foreach($crawler->filter('[rel="stylesheet"],[type="text/css"]') as $content){
             $node = new Crawler($content);
             $url_original = $node->attr('href');
             $url = preg_replace("/(https?|ftp):\/\//","",$url_original);
