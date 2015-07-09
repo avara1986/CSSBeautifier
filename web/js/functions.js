@@ -49,7 +49,13 @@ function getWebsiteCSS(){
             $('#css_info').css('display','block');
             result = "<ul>";
             $.each(data.css, function(i, item) {
-                result += ('<li id="css_'+data.css[i].id+'">'+data.css[i].url+'<a href="#" onclick="sendCss(\''+data.css[i].id+'\'); return false;"><i class="glyphicon glyphicon-search"></i></a>');
+            	if(data.css[i].result == true){
+            		link = '<a href="#" onclick="sendCss(\''+data.css[i].id+'\'); return false;"><i class="glyphicon glyphicon-search"></i></a>';
+            	}else{
+            		link = '<a href="#" ><i class="glyphicon glyphicon-remove"></i></a>';
+            			
+            	}
+                result += ('<li id="css_'+data.css[i].id+'">'+data.css[i].url+link);
             });
             result += "<ul>";
             $('#css_info_msg').html(result);
@@ -121,11 +127,11 @@ function getCss(id_css){
         url: "/api/css/"+id_css+"/"+$('#token').val(),
         success: function(data) {
             $('#css_info_'+id_css).html("");
-            $('#css_info_'+id_css).append('<h4>Original compressed</h4>\
+            $('#css_info_'+id_css).append('<h4>Original compressed ('+data.original_compressed.length+' characters)</h4>\
                     <textarea onclick="this.focus();this.select();return false;">'+data.original_compressed+'</textarea>\
                     <h4>Clean without unsued rules</h4>\
                     <textarea onclick="this.focus();this.select();return false;">'+data.beauty+'</textarea>\
-                    <h4>Clean without unsued rules compressed</h4>\
+                    <h4>Clean without unsued rules compressed ('+data.beauty_compressed.length+' characters. '+ (100 - Math.round((data.beauty_compressed.length*100)/data.original_compressed.length))+'% Removed)</h4>\
                     <textarea onclick="this.focus();this.select();return false;">'+data.beauty_compressed+'</textarea>\
                     </div>');
         },
