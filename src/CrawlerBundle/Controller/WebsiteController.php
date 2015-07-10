@@ -123,13 +123,13 @@ class WebsiteController extends Controller
             $url = str_replace($web->getUrl(),"",$url);
             $url = preg_replace("/\?(.*)/", "", $url);
             if(!preg_match("/fonts\.googleapis\.com/", $url) && preg_match("/\.css/", $url)){
+            	$result = true;
                 if (!preg_match("/^\//", $url)){
                     $url = "/".$url;
                 }
-                try {
-                    $css_content_original = file_get_contents("http://".$web->getUrl()."".$url);
-                } catch (\Exception $e) {
-                    $css_content_original = "";
+                $css_content_original = @file_get_contents("http://".$web->getUrl()."".$url);
+                if($css_content_original===false){
+                	$result = false;
                 }
                 $css = $em->getRepository('CrawlerBundle:Css')->findOneBy(array('website' =>$web ,'file' => $url));
                 if(count($css)==0) {
@@ -138,7 +138,8 @@ class WebsiteController extends Controller
                 $result_css[]= array(
                         'id' => $css->getId(),
                         'url' => "http://".$web->getUrl()."".$url,
-                );
+                		'result' => $result
+                 );
             }
         }
         $em->flush();
