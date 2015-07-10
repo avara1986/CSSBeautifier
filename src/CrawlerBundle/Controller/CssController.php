@@ -35,6 +35,33 @@ class CssController extends Controller
 
         );
         $response = new Response($serializer->serialize($result, 'json'),200);
+        $response->headers->set('Content-Type', 'application/json; charset=UTF-8');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        return $response;
+    }
+    public function readBeautyAction(Request $request, $id, $token = "")
+    {
+        if(strlen($token)==0) $token = $request->get('token');
+
+        $css = $this->getCss($id, $token);
+        if($css===false){
+            return new Response("",404);
+        }
+        $response = new Response($css->getBeauty(),200);
+        $response->headers->set('Content-Type', 'text/css; charset=UTF-8');
+        $response->headers->set('Access-Control-Allow-Origin', '*');
+        return $response;
+    }
+    public function readBeautyComAction(Request $request, $id, $token = "")
+    {
+        if(strlen($token)==0) $token = $request->get('token');
+
+        $css = $this->getCss($id, $token);
+        if($css===false){
+            return new Response("",404);
+        }
+        $response = new Response($css->getBeautyCompressed(),200);
+        $response->headers->set('Content-Type', 'text/css; charset=UTF-8');
         $response->headers->set('Access-Control-Allow-Origin', '*');
         return $response;
     }

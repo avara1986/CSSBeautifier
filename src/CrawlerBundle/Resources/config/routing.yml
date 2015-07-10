@@ -21,6 +21,14 @@ css_read2:
     path:     /css/{id}
     defaults: { _controller: CrawlerBundle:Css:read }
     methods:  [GET]
+css_read_beautify_com:
+    path:     /css/clean/c/{id}/{token}
+    defaults: { _controller: CrawlerBundle:Css:readBeautyCom }
+    methods:  [GET]
+css_read_beautify:
+    path:     /css/clean/{id}/{token}
+    defaults: { _controller: CrawlerBundle:Css:readBeauty }
+    methods:  [GET]
 css_create:
     path:     /css/
     defaults: { _controller: CrawlerBundle:Css:create }
