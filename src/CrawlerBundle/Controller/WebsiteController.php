@@ -43,6 +43,7 @@ class WebsiteController extends Controller
          * */
         $result['css'] = $this->checkAndSaveCSS($crawler, $web);
         $response = new Response($serializer->serialize($result, 'json'),200);
+        $response->headers->set('Content-Type', 'application/json; charset=UTF-8');
         $response->headers->set('Access-Control-Allow-Origin', '*');
         return $response;
     }
@@ -74,6 +75,7 @@ class WebsiteController extends Controller
                 'token' => $website->getToken(),
         );
         $response = new Response($serializer->serialize($result, 'json'),200);
+        $response->headers->set('Content-Type', 'application/json; charset=UTF-8');
         $response->headers->set('Access-Control-Allow-Origin', '*');
         return $response;
     }
