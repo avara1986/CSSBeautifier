@@ -133,6 +133,9 @@ function getCss(id_css){
                     <textarea onclick="this.focus();this.select();return false;">'+data.beauty+'</textarea>\
                     <h4>Clean without unsued rules compressed ('+data.beauty_compressed.length+' characters. '+ (100 - Math.round((data.beauty_compressed.length*100)/data.original_compressed.length))+'% Removed)</h4>\
                     <textarea onclick="this.focus();this.select();return false;">'+data.beauty_compressed+'</textarea>\
+                    <h4>URL to add in your HTML:</h4>\
+                    <a href="http://api.cssbeautifier.com/api/css/clean/c/'+id_css+'/'+$('#token').val()+'"Link to the cleand&compressed CSS></a>\
+                    <input type="txt" onclick="this.focus();this.select();return false;" value="http://api.cssbeautifier.com/api/css/clean/c/'+id_css+'/'+$('#token').val()+'">\
                     </div>');
         },
         statusCode: {
