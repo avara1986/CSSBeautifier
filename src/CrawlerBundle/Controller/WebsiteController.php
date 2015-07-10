@@ -59,17 +59,7 @@ class WebsiteController extends Controller
         if($this->getWebsiteURL($website_url)===false){
             return new Response("ERROR",404);
         }
-        $hash="¡Viva la gente!";
-        $em = $this->getDoctrine()->getManager();
-        $website = $em->getRepository('CrawlerBundle:Website')->findOneBy(array('url' => $website_url));
-        if(count($website)==0) {
-            $website = new Website();
-        }
-        $website->setUrl($website_url);
-        $website->setToken(base64_encode(sha1($website_url.$hash)));
-
-        $em->persist($website);
-        $em->flush();
+        $website = $this->createWebsite($website_url);
         $result = array(
                 'id' => $website->getId(),
                 'token' => $website->getToken(),
@@ -98,6 +88,20 @@ class WebsiteController extends Controller
             return false;
         }
         return $crawler;
+    }
+    private function createWebsite($web_url){
+        $hash="¡Viva la gente!";
+        $em = $this->getDoctrine()->getManager();
+        $website = $em->getRepository('CrawlerBundle:Website')->findOneBy(array('url' => $web_url));
+        if(count($website)==0) {
+            $website = new Website();
+        }
+        $website->setUrl($web_url);
+        $website->setToken(base64_encode(sha1($web_url.$hash)));
+
+        $em->persist($website);
+        $em->flush();
+        return $website;
     }
     private function getWebsite($id, $token)
     {
@@ -135,6 +139,9 @@ class WebsiteController extends Controller
                 }
                 $css = $em->getRepository('CrawlerBundle:Css')->findOneBy(array('website' =>$web ,'file' => $url));
                 if(count($css)==0) {
+                    $css = $this->saveCSS($url, $css_content_original, $web, $em);
+                }else{
+                    $web->removeCss($css);
                     $css = $this->saveCSS($url, $css_content_original, $web, $em);
                 }
                 $result_css[]= array(
