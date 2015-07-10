@@ -44,10 +44,10 @@ It will return a JSON with all website's CSS.
 {"id":12,
 "token":"wDWGRgXEJ5qlI9IaJmV9cL/a3+o=",
 "css":[{
-    "id":18,"url":"podcast\/css\/bootstrap.min.css"},
-    {"id":19,"url":"podcast\/css\/bootstrap-theme.min.css"},
-    {"id":20,"url":"podcast\/css\/font-awesome.min.css"},
-    {"id":21,"url":"podcast\/css\/style.css"},{"id":22}
+    "id":18,"url":"podcast\/css\/bootstrap.min.css","result":true},
+    {"id":19,"url":"podcast\/css\/bootstrap-theme.min.css","result":true},
+    {"id":20,"url":"podcast\/css\/font-awesome.min.css","result":true},
+    {"id":21,"url":"podcast\/css\/style.css"},"result":true}
     ]}
 ```
 With this CSS's Ids, we can use the CSS APIS.
